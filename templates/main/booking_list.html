@@ -1,0 +1,48 @@
+{% extends 'base.html'%} {% block content%}
+
+<div class="container">
+  <h1>Booking</h1>
+  <td>
+    <a href="{% url 'booking_add'%}" class="btn secondary-btn">Add Booking</a>
+  </td>
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <!-- <th>Email</th> -->
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Room</th>
+        <th>Booking Date</th>
+        <!-- <th>Check-In</th> -->
+        <th>Check-Out</th>
+        <th>Total Price</th>
+
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings%}
+      <tr>
+        <td>{{booking.first_name}} {{booking.last_name}}</td>
+        <!-- <td>{{booking.email}}</td> -->
+        <td>{{booking.phone_number}}</td>
+        <td>{{booking.address}}</td>
+        <td>{{booking.room.room_number}}</td>
+        <td>{{booking.booking_date}}</td>
+        <!-- <td>{{booking.check_in}}</td> -->
+        <td>{{booking.check_out}}</td>
+        <td>&#8358; {{booking.total_price}}</td>
+
+        <td>{{booking.status}}</td>
+        <td>
+          <a href="{% url 'booking_update' booking.id %}" class="btn primary-btn">Update</a>
+          <a href="{% url 'booking_delete' booking.id %}" class="btn secondary-btn">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content%}

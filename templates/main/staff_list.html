@@ -1,0 +1,41 @@
+{% extends 'base.html'%} {% block content%}
+
+<div class="container">
+  <h1>Staff List</h1>
+  <td>
+    <a href="{% url 'staff_add'%}" class="btn secondary-btn">Add Staff</a>
+  </td>
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <td>Full Name</td>
+        <td>Role</td>
+        <td>Email</td>
+        <td>Phone Number</td>
+        <td>Date Employed</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for staff in staffs %}
+      <tr>
+        <td>{{staff.first_name}} {{staff.last_name}}</td>
+        <td>{{staff.role}}</td>
+        <td>{{staff.email}}</td>
+        <td>{{staff.phone_number}}</td>
+        <td>{{staff.hire_date}}</td>
+
+        <td>
+          <a href="{% url 'staff_update' staff.id %}" class="btn primary-btn"
+            >Update</a
+          >
+          <a href="{% url 'staff_delete' staff.id %}" class="btn secondary-btn"
+            >Delete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content%}

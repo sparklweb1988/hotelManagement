@@ -1,0 +1,320 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar styling */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 8%;
+    height: 70px;
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+  
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: navy;
+    padding: 10px 15px;
+    
+}
+
+/* Logo Styling */
+.logo {
+    font-size: 30px;
+    text-decoration: none;
+    color: brown;
+    font-weight: bold;
+}
+
+/* Button Styling */
+.primary {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: green;
+    color: white;
+}
+
+.danger {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    background: brown;
+    color: white;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+
+    
+    nav {
+        padding: 10px 5%;
+    
+    }
+
+    nav ul {
+        flex-direction: column;
+        
+        align-items: center;
+     
+        width: 100%;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+       
+        width: 100%;
+       
+    }
+
+    nav ul li a {
+        font-size: 16px;
+       
+        padding: 12px 20px;
+      
+        text-align: center;
+      
+    }
+
+    /* Logo positioning for mobile */
+    .logo {
+        font-size: 24px;
+      
+        margin-bottom: 10px;
+       
+    }
+
+     */
+    nav {
+        background-color: #f1f1f1;
+       
+    }
+}
+
+
+.container{
+    width: 90%;
+    margin: 90px auto;
+}
+
+.container h1{
+    text-align: center;
+    color: navy;
+}
+
+
+/* Styling the table */
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
+    
+}
+
+.responsive-table th,
+.responsive-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Zebra striping for rows */
+.responsive-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Make the table header stand out */
+.responsive-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Make the table responsive */
+@media screen and (max-width: 768px) {
+    .responsive-table {
+        display: block;
+        overflow-x: auto;
+      
+        white-space: nowrap;
+        
+    }
+
+    .responsive-table th,
+    .responsive-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    /* Display table cells as block elements on small screens */
+    .responsive-table td {
+        display: block;
+        width: 100%;
+        
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+      
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+    }
+
+    /* Make headers and rows appear stacked */
+    .responsive-table tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Remove the table borders */
+    .responsive-table th,
+    .responsive-table td {
+        border: none;
+    }
+}
+
+
+
+
+
+
+
+/* Form container */
+.responsive-form {
+    width: 100%;
+    max-width: 600px;
+    /* Set a max-width for better control on large screens */
+    margin: 0 auto;
+    /* Center the form */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+/* General form styles */
+.responsive-form .form-group {
+    margin-bottom: 15px;
+}
+
+.responsive-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.responsive-form input,
+.responsive-form select,
+.responsive-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.responsive-form textarea {
+    resize: vertical;
+    /* Allow vertical resizing */
+}
+
+/* Submit button */
+.responsive-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.responsive-form button:hover {
+    background-color: #45a049;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .responsive-form {
+        padding: 15px;
+    }
+
+    .responsive-form input,
+    .responsive-form select,
+    .responsive-form textarea,
+    .responsive-form button {
+        font-size: 16px;
+    }
+
+    .responsive-form label {
+        font-size: 16px;
+    }
+}
+
+
+
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    /* Reduced padding for smaller buttons */
+    font-size: 14px;
+    /* Smaller font size */
+    text-decoration: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Primary Button Style */
+.primary-btn {
+    background-color: #4CAF50;
+    /* Green */
+}
+
+.primary-btn:hover {
+    background-color: #45a049;
+}
+
+/* Secondary Button Style */
+.secondary-btn {
+    background-color: brown;
+    /* Red */
+}
+
+.secondary-btn:hover {
+    background-color: brown;
+}

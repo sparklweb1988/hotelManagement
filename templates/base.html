@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Management</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+  </head>
+
+  <body>
+    <nav>
+      <a href="" class="logo">Hotel Name</a>
+      {% if user.is_authenticated %}
+
+      <ul>
+        <li><a href="{% url 'room_list'%}">Room</a></li>
+        <li><a href="{% url 'booking_list'%}">Booking</a></li>
+        <li><a href="{% url 'payment_list'%}">Payment</a></li>
+        <li><a href="{% url 'staff_list'%}">Staff</a></li>
+        <li><a href="{% url 'logout'%}" class="danger">Logout</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% block content%} {% endblock content%}
+  </body>
+</html>

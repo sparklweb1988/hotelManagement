@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>Update Booking</h1>
+    <form class="responsive-form" method="POST" action="{% url 'booking_update' room.id %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" value="{{ room.first_name }}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" value="{{ room.last_name }}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ room.email }}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="phone_number">Phone Number</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ room.phone_number }}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" required>{{ room.address }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="room">Room</label>
+            <select id="room" name="room" required>
+                {% for available_room in rooms %}
+                <option value="{{ available_room.id }}" {% if available_room.id == room.room.id %}selected{% endif %}>
+                    {{ available_room.room_number }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="check_in">Check-In</label>
+            <input type="datetime-local" id="check_in" name="check_in" value="{{ room.check_in|date:'Y-m-d\TH:i' }}"
+                required />
+        </div>
+
+        <div class="form-group">
+            <label for="check_out">Check-Out</label>
+            <input type="datetime-local" id="check_out" name="check_out" value="{{ room.check_out|date:'Y-m-d\TH:i' }}"
+                required />
+        </div>
+
+        <div class="form-group">
+            <label for="total_price">Total Price</label>
+            <input type="number" id="total_price" name="total_price" value="{{ room.total_price }}" step="0.01"
+                required />
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="PENDING" {% if room.status == 'PENDING' %}selected{% endif %}>Pending</option>
+                <option value="CONFIRMED" {% if room.status == 'CONFIRMED' %}selected{% endif %}>Confirmed</option>
+                <option value="CANCELLED" {% if room.status == 'CANCELLED' %}selected{% endif %}>Cancelled</option>
+            </select>
+        </div>
+
+        <button type="submit">Update</button>
+        <br /><br />
+        <td>
+            <a href="{% url 'booking_list' %}" class="btn primary-btn">Go Back</a>
+        </td>
+    </form>
+</div>
+
+{% endblock content %}

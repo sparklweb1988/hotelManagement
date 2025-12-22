@@ -1,0 +1,78 @@
+{% extends 'base.html'%} {% block content%}
+
+<div class="container">
+  <h1>Add Booking</h1>
+  <form class="responsive-form" method="POST" action="{% url 'booking_add'%}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="first_name">First Name</label>
+      <input type="text" id="first_name" name="first_name" required />
+    </div>
+    <div class="form-group">
+      <label for="last_name">Last Name</label>
+      <input type="text" id="last_name" name="last_name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="phone_number">Phone Number</label>
+      <input type="text" id="phone_number" name="phone_number" required />
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea id="address" name="address"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="room">Room</label>
+      <select id="room" name="room" required>
+        {% for room in rooms %}
+        <option value="{{ room.id }}">{{ room.room_number }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="check_in">Check-In</label>
+      <input type="datetime-local" id="check_in" name="check_in" required />
+    </div>
+
+    <div class="form-group">
+      <label for="check_out">Check-Out</label>
+      <input type="datetime-local" id="check_out" name="check_out" required />
+    </div>
+
+    <div class="form-group">
+      <label for="total_price">Total Price</label>
+      <input
+        type="number"
+        id="total_price"
+        name="total_price"
+        step="0.01"
+        required
+      />
+    </div>
+
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" name="status" required>
+        <option value="PENDING">Pending</option>
+        <option value="CONFIRMED">Confirmed</option>
+        <option value="CANCELLED">Cancelled</option>
+      </select>
+    </div>
+
+    <button type="submit">Submit</button>
+    <br /><br />
+    <td>
+      <a href="{% url 'booking_list'%}" class="btn primary-btn">Go Back</a>
+    </td>
+  </form>
+</div>
+{% endblock content%}
