@@ -140,20 +140,72 @@ def booking_add(request):
 # UPDATE BOOKING VIEW
 
 def booking_update(request, id):
-    room = Room.objects.filter(is_available=True) 
+    booking = get_object_or_404(Booking, id=id)   # ✅ SINGLE booking
+    rooms = Room.objects.filter(is_available=True)  # ✅ for dropdown
+
     if request.method == 'POST':
-        room.first_name = request.POST.get('first_name')
-        room.last_name = request.POST.get('last_name')
-        room.email = request.POST.get('email')
-        room.phone_number = request.POST.get('phone_number')
-        room.address = request.POST.get('address')
-        room.room_id = request.POST.get('room')  # room_id refers to the room the booking is for
-        room.check_in = request.POST.get('check_in')
-        room.check_out = request.POST.get('check_out')
-        room.total_price = request.POST.get('total_price')
-        room.status = request.POST.get('status')
-        room.save()  # Don't forget to save the updated room object
-    return render(request, 'main/booking_update.html', {'room': room})
+        booking.first_name = request.POST.get('first_name')
+        booking.last_name = request.POST.get('last_name')
+        booking.email = request.POST.get('email')
+        booking.phone_number = request.POST.get('phone_number')
+        booking.address = request.POST.get('address')
+        booking.room_id = request.POST.get('room')
+        booking.check_in = request.POST.get('check_in')
+        booking.check_out = request.POST.get('check_out')
+        booking.total_price = request.POST.get('total_price')
+        booking.status = request.POST.get('status')
+        booking.save()
+
+        return redirect('booking_list')
+
+    return render(request, 'main/booking_update.html', {
+        'booking': booking,
+        'rooms': rooms
+    })
+
+
+
+
+#  DELETE BOOKING VIEW
+def booking_delete(request, id):
+    bookings= get_object_or_404(Booking,pk=id)
+    bookings.delete()
+    return redirect('booking_list')
+
+#  ADD PAYMENT VIEW
+
+
+def payment_list(request):
+    payments = Payment.objects.all()
+    context = {'payments':payments}
+    return render(request, 'main/payment_list.html', context)
+
+
+
+
+def payment_add(request):
+    bookings = Booking.objects.all()
+
+    if request.method == 'POST':
+        booking_id = request.POST.get('booking')
+
+        if not booking_id:
+            return HttpResponseBadRequest("Booking is required.")
+
+        booking = get_object_or_404(Booking, id=booking_id)
+
+        payment = Payment.objects.create(
+            booking=booking,
+            payment_date=request.POST.get('payment_date'),
+            amount_paid=request.POST.get('amount_paid'),
+            payment_method=request.POST.get('payment_method'),
+            status=request.POST.get('status'),
+        )
+
+        return redirect('payment_list')
+
+    return render(request, 'main/payment_add.html', {'bookings': bookings})
+
 
 
 #  DELETE BOOKING VIEW
