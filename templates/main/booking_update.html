@@ -3,7 +3,7 @@
 
 <div class="container">
     <h1>Update Booking</h1>
-    <form class="responsive-form" method="POST" action="{% url 'booking_update' room.id %}">
+    <form class="responsive-form" method="POST" action="{% url 'booking_update' booking.id %}">
         {% csrf_token %}
 
         <div class="form-group">
