@@ -4,6 +4,7 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth.decorators import login_required
 
 from hotelapp.models import  Booking, Payment, Room, Staff
 
@@ -31,7 +32,7 @@ def signin_view(request):
 
 
 #  ROOM VIEWS
-
+@login_required
 def room_list(request):
     rooms = Room.objects.all()
     context = {
@@ -40,7 +41,7 @@ def room_list(request):
     return render(request, 'main/room_list.html',context)
 
 # ADD ROOM
-
+@login_required
 def room_add(request):
     if request.method =='POST':
         room_number = request.POST.get('room_number')
@@ -59,6 +60,7 @@ def room_add(request):
 
 
 # UPDATE ROOM VIEW
+@login_required
 def room_update(request,id):
     rooms = get_object_or_404(Room, pk=id)
     if request.method =='POST':
@@ -74,14 +76,14 @@ def room_update(request,id):
 
 
 #  DELETE VIEW
-
+@login_required
 def room_delete(request,id):
     rooms = get_object_or_404(Room,pk=id)
     rooms.delete()
     return redirect('room_list')
 
 # BOOKING VIEWS
-
+@login_required
 def booking_list(request):
     bookings = Booking.objects.all()
     
@@ -91,7 +93,7 @@ def booking_list(request):
     return render(request, 'main/booking_list.html',context)
 
 # ADD BOOKING VIEW
-
+@login_required
 def booking_add(request):
     rooms = Room.objects.filter(is_available=True)  # Get only available rooms
     if request.method == 'POST':
@@ -138,7 +140,7 @@ def booking_add(request):
 
 
 # UPDATE BOOKING VIEW
-
+@login_required
 def booking_update(request, id):
     booking = get_object_or_404(Booking, id=id)   # ✅ SINGLE booking
     rooms = Room.objects.filter(is_available=True)  # ✅ for dropdown
@@ -167,6 +169,7 @@ def booking_update(request, id):
 
 
 #  DELETE BOOKING VIEW
+@login_required
 def booking_delete(request, id):
     bookings= get_object_or_404(Booking,pk=id)
     bookings.delete()
@@ -174,7 +177,7 @@ def booking_delete(request, id):
 
 #  ADD PAYMENT VIEW
 
-
+@login_required
 def payment_list(request):
     payments = Payment.objects.all()
     context = {'payments':payments}
@@ -182,7 +185,7 @@ def payment_list(request):
 
 
 
-
+@login_required
 def payment_add(request):
     bookings = Booking.objects.all()
 
@@ -209,6 +212,7 @@ def payment_add(request):
 
 
 #  DELETE BOOKING VIEW
+@login_required
 def booking_delete(request, id):
     bookings= get_object_or_404(Booking,pk=id)
     bookings.delete()
@@ -216,7 +220,7 @@ def booking_delete(request, id):
 
 #  ADD PAYMENT VIEW
 
-
+@login_required
 def payment_list(request):
     payments = Payment.objects.all()
     context = {'payments':payments}
@@ -224,7 +228,7 @@ def payment_list(request):
 
 
 
-
+@login_required
 def payment_add(request):
     bookings = Booking.objects.all()
 
@@ -252,7 +256,7 @@ def payment_add(request):
 #  UPDATE PAYMENT VIEW
 
 
-
+@login_required
 def payment_update(request, id):
     
     payment = get_object_or_404(Payment, id=id)
@@ -285,7 +289,7 @@ def payment_update(request, id):
 
 
 #  DELETE VIEW
-
+@login_required
 def payment_delete(request,id):
     payments = get_object_or_404(Payment, pk=id)
     payments.delete()
@@ -293,11 +297,13 @@ def payment_delete(request,id):
 
 
 # STAFF VIEWS
+@login_required
 def staff_list(request):
     staffs = Staff.objects.all()
     return render(request, 'main/staff_list.html',{'staffs':staffs})
 
 # ADD STAFF VIEW
+@login_required
 
 def staff_add(request):
     if request.method =='POST':
@@ -318,7 +324,7 @@ def staff_add(request):
 
 
 #  UPDATE STAFF VI
-
+@login_required
 def staff_update(request, id):
    
     staff = get_object_or_404(Staff, id=id)
@@ -346,6 +352,7 @@ def staff_update(request, id):
 
 
 #  STAFF DELETE VIEW
+@login_required
 def  staff_delete(request, id):
     staffs = get_object_or_404(Staff, pk=id)
     staffs.delete()
