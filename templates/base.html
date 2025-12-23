@@ -19,6 +19,8 @@
         <li><a href="{% url 'payment_list'%}">Payment</a></li>
         <li><a href="{% url 'staff_list'%}">Staff</a></li>
         <li><a href="{% url 'logout'%}" class="danger">Logout</a></li>
+        {% else %}
+         <li><a href="{% url 'signin'%}" class="danger">Login</a></li>
         {% endif %}
       </ul>
     </nav>
